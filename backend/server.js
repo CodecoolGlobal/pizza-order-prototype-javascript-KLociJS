@@ -5,8 +5,10 @@ const filePath1 = path.join(`${__dirname}/pizza.json`);
 const filePath2 = path.join(`${__dirname}/allergens.json`);
 const filePath3 = path.join(`${__dirname}/order.json`)
 const app = express()
-app.use(express.json())
 
+
+app.use(express.json())
+app.use("/api/pizzalist",express.static(path.join(`${__dirname} +/../frontend`)))
 
 
 app.get("/api/pizza",(req,res)=>{
@@ -31,6 +33,8 @@ app.post("/api/order", (req,res)=>{
     writeFileSync(filePath3, JSON.stringify(order))
     res.status(200).send("DONE")
 })
+
+
 
 
 app.listen(3000, ()=> console.log("http://localhost:3000/"))

@@ -1,0 +1,120 @@
+{
+    "pizza": [
+        {
+            "id": 1,
+            "name": "Sonkás",
+            "ingredients": [
+                "paradicsom alap",
+                "sajt",
+                "sonka"
+            ],
+            "price": 2100,
+            "allergens": [
+                1,
+                2,
+                3
+            ]
+        },
+        {
+            "id": 2,
+            "name": "Songoku",
+            "ingredients": [
+                "paradicsom alap",
+                "sonka",
+                "gomba",
+                "kukorica",
+                "laktózmentes sajt"
+            ],
+            "price": 2300,
+            "allergens": [
+                1,
+                2
+            ]
+        },
+        {
+            "id": 3,
+            "name": "Piedone kedvence",
+            "ingredients": [
+                "paradicsom alap",
+                "hagyma",
+                "bab",
+                "kukorica",
+                "kolbász"
+            ],
+            "price": 2290,
+            "allergens": [
+                1,
+                2
+                
+            ]
+        },
+        {
+            "id": 4,
+            "name": "Honeymoon Pizza",
+            "ingredients": [
+                "paradicsom alap",
+                "sajt",
+                "mozzarella sajt",
+                "szalámi",
+                "chili paprika",
+                "méz"
+            ],
+            "price": 2400,
+            "allergens": [
+                1,
+                2,
+                3
+            ]
+        },
+        {
+            "id": 5,
+            "name": "Gluténmentes Honeymoon Pizza",
+            "ingredients": [
+                "paradicsom alap",
+                "sajt",
+                "mozzarella sajt",
+                "szalámi",
+                "chili paprika",
+                "méz"
+            ],
+            "price": 2800,
+            "allergens": [
+                2,
+                3
+            ]
+        },
+        {
+            "id": 6,
+            "name": "Vegetáriánus Pizza",
+            "ingredients": [
+                "paradicsom alap",
+                "sajt",
+                "lila hagyma",
+                "feta",
+                "paradicosm",
+                "oliva"
+            ],
+            "price": 4000,
+            "allergens": [
+                1,
+                3
+            ]
+        },
+        {
+            "id": 7,
+            "name": "négysajtos Pizza",
+            "ingredients": [
+                "paradicsom alap",
+                "sajt",
+                "mozzarella sajt",
+                "parmesan sajt",
+                "gouda sajt"
+            ],
+            "price": 2900,
+            "allergens": [
+                1,
+                3
+            ]
+        }
+    ]
+}

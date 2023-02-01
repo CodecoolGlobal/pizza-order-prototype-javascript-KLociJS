@@ -2,15 +2,15 @@
     "allergens":[
         {
             "id":1,
-            "name": "Glutén"
+            "name": "glutén"
         },
         {   
             "id":2,
-            "name":"Hús"
+            "name":"hús"
         },
         {
             "id":3,
-            "name":"Laktóz"
+            "name":"laktóz"
         }
     ]
 }

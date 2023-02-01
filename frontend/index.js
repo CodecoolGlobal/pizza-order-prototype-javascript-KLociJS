@@ -1,5 +1,11 @@
 const rootElement = document.getElementById("root")
 const allergenslist = ['glutén', 'hús', 'laktóz']
+const pizzaorder = {
+                    Address:{
+                      City:"",
+                      Street:"",
+                    }
+                    }
 
 
 const onLoad = async _ => {
@@ -7,7 +13,7 @@ const onLoad = async _ => {
   pizzaList.forEach(pizza=>{
     pizzaComponent(pizza)
   })
-  
+  createForm(rootElement)
 }
 
 window.addEventListener('load', onLoad)
@@ -45,6 +51,65 @@ const createList = (parent, ingredients, ulclassName, liclassName) => {
   parent.appendChild(unorderedElement)
   unorderedElement.classList.add(ulclassName)
 }
+
+const createForm = (parent)=>{
+  const formElement = document.createElement('form')
+  const nameElement = document.createElement('input')
+  const emailElement = document.createElement('input')
+  const adressElement = document.createElement('input')
+  const buttonElement = document.createElement('button')
+
+  buttonElement.innerText = 'ORDER'
+  
+
+  nameElement.placeholder = "Your full name:"
+  emailElement.placeholder = "Email Adress:"
+  adressElement.placeholder = "Adress:"
+  
+  buttonElement.classList.add("order-button")
+  formElement.classList.add("form-element")
+  nameElement.classList.add("name-element")
+  emailElement.classList.add("email-element")
+  adressElement.classList.add("adress-element")
+
+  parent.appendChild(formElement)
+
+  formElement.appendChild(buttonElement)
+  formElement.appendChild(nameElement)
+  formElement.appendChild(emailElement)
+  formElement.appendChild(adressElement)
+  
+  
+
+
+    nameElement.addEventListener("input", (event)=>updateOrders(event, "Name:"))
+    emailElement.addEventListener("input", (event)=>updateOrders(event, "Email:"))
+    adressElement.addEventListener("input", (event)=>updateAdress(event, "Adress:"))
+    buttonElement.addEventListener("click", buttonclick, false)
+  
+function buttonclick(event){
+  event.preventDefault();
+  console.log(pizzaorder)
+ clearInput()
+}
+function clearInput (){
+  nameElement.value = ""
+  emailElement.value = ""
+  adressElement.value = ""
+}
+}
+
+function updateOrders(event, key){
+  pizzaorder[key] = event.target.value
+}
+
+function updateAdress(event, key){
+  let city = event.target.value.split(',')
+  pizzaorder.Address.City = city[0]
+  pizzaorder.Address.Street = city[1]
+}
+
+
 
 const createAllergensList = (parent, allergens, uclassName, iclassName) => {
   const unorderedElement = document.createElement('ul')

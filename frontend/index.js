@@ -1,10 +1,14 @@
 const rootElement = document.getElementById("root")
+
 const pizzaorder = {
-                    Address:{
-                      City:"",
-                      Street:"",
-                    }
-                    }
+  Address:{
+    City:"",
+    Street:"",
+  }
+}
+
+
+const orderedPizzas = []
 
 const onLoad = async _ => {
   let { pizza : pizzaList } = await getData('http://localhost:3000/api/pizza')
@@ -14,10 +18,9 @@ const onLoad = async _ => {
   
   createInput(pizzaList)
   
-  pizzaList.forEach(pizza=>{
-    pizzaComponent(pizza)
+  pizzaList.forEach((pizza,i)=>{
+    pizzaComponent(pizza,i,pizzaList)
   })
-  createForm(rootElement)
 }
 
 window.addEventListener('load', onLoad)
@@ -31,7 +34,7 @@ const getExtendedPizzaList = (pizzaList,allergenList) =>{
   })
 }
 
-const pizzaComponent = (pizza) => {
+const pizzaComponent = (pizza,ID,array) => {
   const container = document.createElement('div')
   container.classList.add('pizza-container')
   rootElement.appendChild(container)
@@ -42,6 +45,45 @@ const pizzaComponent = (pizza) => {
   createText(container, 'h3', pizza.price, 'pizza-price')
   createText(container, 'h2', "Allergének: ", 'pizza-allergens')
   createAllergensList(container, pizza.allergens, 'pizza-allergens-ul', 'pizza-allergens-li')
+  createButton(container,ID,array,'order-button')
+  pizzaAmountInput(container,ID,'amount-input')
+}
+
+const getDate = () =>{
+  const date = new Date()
+  return ({
+    year: date.getFullYear(),
+    month: date.getMonth()+1,
+    day: date.getDate(),
+    hour: date.getHours(),
+    minute: date.getMinutes()
+  })
+}
+
+
+
+const pizzaAmountInput = (parent,ID,className) => {
+  const input = document.createElement('input')
+  input.setAttribute('placeholder','enter amount')
+  input.classList.add(className)
+  input.id=`input-${ID}`
+  parent.appendChild(input)
+}
+const createButton = (parent,ID,array,className) =>{
+  const button = document.createElement('button')
+  button.innerText='Order'
+  button.id=ID
+  button.classList.add(className)
+  parent.appendChild(button)
+  button.addEventListener('click', (e)=>{
+    const ID = e.target.id
+    const inputValue = document.getElementById(`input-${ID}`).value
+    orderedPizzas.push({name:array[ID].id, amount:inputValue})
+
+    //Add form if orders exists
+    const form = document.getElementsByClassName('form-element')
+    if(form.length<=0)createForm(rootElement)
+  })
 }
 
 const createInput = (arr) =>{
@@ -55,8 +97,8 @@ const createInput = (arr) =>{
       return !pizza.allergens.includes(e.target.value)
     })
     removePizzaComponents()
-    filteredPizzaList.forEach(pizza=>{
-      pizzaComponent(pizza)
+    filteredPizzaList.forEach((pizza,i)=>{
+      pizzaComponent(pizza,i,filteredPizzaList)
     })
   })
 }
@@ -143,7 +185,7 @@ function updateOrders(event, key){
   pizzaorder[key] = event.target.value
 }
 
-function updateAdress(event, key){
+function updateAdress(event){
   let city = event.target.value.split(',')
   pizzaorder.Address.City = city[0]
   pizzaorder.Address.Street = city[1]

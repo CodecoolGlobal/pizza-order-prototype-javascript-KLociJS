@@ -1,5 +1,4 @@
 const rootElement = document.getElementById("root")
-const allergenslist = ['glutén', 'hús', 'laktóz']
 const pizzaorder = {
                     Address:{
                       City:"",
@@ -7,9 +6,14 @@ const pizzaorder = {
                     }
                     }
 
-
 const onLoad = async _ => {
-  const { pizza : pizzaList } = await getData('http://localhost:3000/api/pizza')
+  let { pizza : pizzaList } = await getData('http://localhost:3000/api/pizza')
+  const { allergens } = await getData('http://localhost:3000/api/allergens')
+
+  pizzaList = getExtendedPizzaList(pizzaList,allergens)
+  
+  createInput(pizzaList)
+  
   pizzaList.forEach(pizza=>{
     pizzaComponent(pizza)
   })
@@ -17,6 +21,15 @@ const onLoad = async _ => {
 }
 
 window.addEventListener('load', onLoad)
+
+const getExtendedPizzaList = (pizzaList,allergenList) =>{
+  return pizzaList.map(pizza=>{
+    let allergen = pizza.allergens.map(allergen=>{
+      return allergenList.find(a=>a.id===allergen).name
+    })
+    return {...pizza, allergens:allergen}
+  })
+}
 
 const pizzaComponent = (pizza) => {
   const container = document.createElement('div')
@@ -31,15 +44,42 @@ const pizzaComponent = (pizza) => {
   createAllergensList(container, pizza.allergens, 'pizza-allergens-ul', 'pizza-allergens-li')
 }
 
+const createInput = (arr) =>{
+  const input = document.createElement('input')
+  input.classList.add('allergen-input')
+  input.id='allergens'
+  document.body.insertAdjacentElement('afterbegin',input)
+
+  input.addEventListener('input',(e)=>{
+    const filteredPizzaList = [...arr].filter(pizza=>{
+      return !pizza.allergens.includes(e.target.value)
+    })
+    removePizzaComponents()
+    filteredPizzaList.forEach(pizza=>{
+      pizzaComponent(pizza)
+    })
+  })
+}
+
+const removePizzaComponents = () =>{
+  const elements = document.getElementsByClassName('pizza-container')
+
+  while(elements.length>0){
+    elements[0].remove()
+  }
+}
+
 const getData = async (url) => {
   const data = await fetch(url)
   return await data.json()
 }
+
 const createImg = (parent) =>{
   const img = document.createElement('img')
   img.src='./pizza.png'
   parent.appendChild(img)
 }
+
 const createList = (parent, ingredients, ulclassName, liclassName) => {
   const unorderedElement = document.createElement('ul')
   ingredients.forEach(element => {
@@ -116,7 +156,7 @@ const createAllergensList = (parent, allergens, uclassName, iclassName) => {
   allergens.forEach(element => {
 
     const Listelement = document.createElement('li')
-    Listelement.textContent = allergenslist[element - 1]
+    Listelement.textContent = element
     unorderedElement.appendChild(Listelement)
     Listelement.classList.add(iclassName)
   })

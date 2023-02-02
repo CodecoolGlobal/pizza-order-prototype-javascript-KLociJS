@@ -8,10 +8,10 @@ const app = express()
 
 
 app.use(express.json())
-app.use("/pizza/list",express.static(path.join(`${__dirname} +/../frontend`)))
+app.use("/pizza/list",express.static(path.join(`${__dirname}/../frontend`)))
 
 app.get('/pizza/list', (req,res)=>{
-    res.sendFile(path.join(`${__dirname} +/../frontend/index.html`))
+    res.sendFile(path.join(`${__dirname}/../frontend/index.html`))
 })
 
 app.get("/api/pizza",(req,res)=>{
@@ -45,30 +45,6 @@ app.post("/api/order", (req,res)=>{
     res.status(200).send("DONE")
 })
 
-const x = {
-    "id": 1,
-    "pizzas": [
-        {
-            "id": 1,
-            "amount": 2
-        }
-    ],
-    "date": {
-        "year": 2022,
-        "month": 6,
-        "day": 7,
-        "hour": 18,
-        "minute": 47
-    },
-    "customer": {
-        "name": "John Doe",
-        "email": "jd@example.com",
-        "address": {
-            "city": "Palermo",
-            "street": "Via Appia 6"
-        }
-    }
-}
 
 const getDate = () =>{
     const date = new Date()

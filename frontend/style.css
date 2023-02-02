@@ -1,5 +1,8 @@
 * {box-sizing: border-box;}
-body {font-family: Verdana, sans-serif;}
+body {
+  background-color: red;
+  font-family: Verdana, sans-serif;
+}
 .mySlides {display: none;}
 img {vertical-align: middle;}
 
@@ -66,10 +69,13 @@ PIZZA THINGS
 *********/
 .pizza-container{
     border-radius: 5px;
-    background-color:rgb(240, 61, 61);
-    color:rgb(228, 228, 228);
+    background-color:rgb(255, 255, 255);
+    color:rgb(0, 0, 0);
     /* padding: 2rem; */
     margin: 2rem;
+}
+.amount-input{
+  width: 55px;
 }
 #root{
     display: flex;

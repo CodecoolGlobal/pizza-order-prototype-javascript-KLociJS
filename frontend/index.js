@@ -39,14 +39,16 @@ const pizzaComponent = (pizza,ID,array) => {
   container.classList.add('pizza-container')
   rootElement.appendChild(container)
   createImg(container)
-  createText(container, 'h2', pizza.name, 'pizza-header')
-  createList(container, pizza.ingredients, 'pizza-list', 'piza-element')
-  createText(container, 'h2', "Ár:  ", 'pizza-price-name')
-  createText(container, 'h3', pizza.price, 'pizza-price')
-  createText(container, 'h2', "Allergének: ", 'pizza-allergens')
-  createAllergensList(container, pizza.allergens, 'pizza-allergens-ul', 'pizza-allergens-li')
-  createButton(container,ID,array,'order-button')
-  pizzaAmountInput(container,ID,'amount-input')
+  createText(container, 'h2', pizza.name, 'heading')
+  createList(container, pizza.ingredients, 'pizza-list', 'list')
+  createText(container, 'h2', "Allergének: ", 'heading')
+  createAllergensList(container, pizza.allergens, 'pizza-allergens-ul', 'list')
+  createText(container, 'h3', pizza.price + ' HUF', 'pizza-price')
+  const inputContainer = document.createElement('div')
+  inputContainer.classList.add('input-container')
+  container.appendChild(inputContainer)
+  createButton(inputContainer,ID,array,'button')
+  pizzaAmountInput(inputContainer,ID,'input')
 }
 //Get the current date
 const getDate = () =>{
@@ -67,6 +69,7 @@ const pizzaAmountInput = (parent,ID,className) => {
   input.setAttribute('placeholder','Amount')
   input.classList.add(className)
   input.id=`input-${ID}`
+  input.classList.add('input')
   parent.appendChild(input)
 }
 //Creating an order button
@@ -76,6 +79,7 @@ const createButton = (parent,ID,array,className) =>{
   button.id=ID
   button.classList.add(className)
   parent.appendChild(button)
+  button.classList.add('button')
   button.addEventListener('click', (e)=>{
     const ID = e.target.id
     const inputValue = document.getElementById(`input-${ID}`).value
@@ -89,9 +93,10 @@ const createButton = (parent,ID,array,className) =>{
 //Create an input box for filtering by allergens
 const createInput = (arr) =>{
   const input = document.createElement('input')
-  input.classList.add('allergen-input')
+  input.classList.add('input')
+  input.setAttribute('placeholder','Filter by allergens...')
   input.id='allergens'
-  document.body.insertAdjacentElement('afterbegin',input)
+  rootElement.insertAdjacentElement('afterbegin',input)
 
   input.addEventListener('input',(e)=>{
     const filteredPizzaList = [...arr].filter(pizza=>{
@@ -136,6 +141,8 @@ const createList = (parent, ingredients, ulclassName, liclassName) => {
 }
 
 const createForm = (parent)=>{
+  const formHeading = document.createElement('h2')
+  formHeading.textContent='Order info'
   const formElement = document.createElement('form')
   const nameElement = document.createElement('input')
   const emailElement = document.createElement('input')
@@ -164,18 +171,20 @@ const createForm = (parent)=>{
   emailElement.placeholder = "Email Adress:"
   adressElement.placeholder = "Adress:"
   
-  buttonElement.classList.add("order-button")
+  formHeading.classList.add('heading')
+  buttonElement.classList.add("button")
   formElement.classList.add("form-element")
-  nameElement.classList.add("name-element")
-  emailElement.classList.add("email-element")
-  adressElement.classList.add("adress-element")
+  nameElement.classList.add("input")
+  emailElement.classList.add("input")
+  adressElement.classList.add("input")
 
   parent.appendChild(formElement)
 
-  formElement.appendChild(buttonElement)
+  formElement.appendChild(formHeading)
   formElement.appendChild(nameElement)
   formElement.appendChild(emailElement)
   formElement.appendChild(adressElement)
+  formElement.appendChild(buttonElement)
   
   
 

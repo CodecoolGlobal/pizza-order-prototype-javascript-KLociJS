@@ -1,6 +1,6 @@
 * {box-sizing: border-box;}
 body {
-  background-color: red;
+  background-color: rgba(255, 107, 107, 0.836);
   font-family: Verdana, sans-serif;
 }
 .mySlides {display: none;}
@@ -68,7 +68,11 @@ img {vertical-align: middle;}
 PIZZA THINGS
 *********/
 .pizza-container{
-    border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+    border-radius: 20px;
+    height: 750px;
     background-color:rgb(255, 255, 255);
     color:rgb(0, 0, 0);
     /* padding: 2rem; */
@@ -80,16 +84,95 @@ PIZZA THINGS
 #root{
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-around;
+    align-items: flex-start;
+    justify-content: center;
 
 }
 img{
   width: 320px;
-  border-radius: 5px 5px 0 0;
+  border-radius: 20px 20px 0 0;
 }
 [class^=pizza] {
   margin-left: 1rem;
+}
+
+.input {
+  background-color: white;
+  color: rgba(240, 52, 52, 0.952);
+  padding: 0.5rem;
+  border: 1px solid gray;
+  border-radius: 5px;
+  font-size: 20px;
+  width: 120px;
+
+
+}
+.input::placeholder{
+  color: rgba(240, 52, 52, 0.952);
+  font-size: 20px;
+
+}
+#allergens{
+  width: 40%;
+  background-color: rgba(255, 255, 255, 0.801);
+  margin-top: 1rem;
+  margin-left: 30%;
+  margin-right: 30%;
+}
+
+.button {
+  background-color: rgba(235, 21, 21, 0.952);
+  color: white;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 20px;
+  width: 150px;
+}
+
+button:hover{
+  background-color: rgba(240, 52, 52, 0.952);
+  cursor: pointer;
+}
+
+.list {
+  color: rgba(240, 52, 52, 0.952);
+}
+
+.heading{
+  color: rgba(240, 52, 52, 0.952);
+  padding-left: 1.5rem;
+}
+
+.pizza-price {
+  color: rgba(240, 52, 52, 0.952);
+  margin-top: 2rem;
+  margin-left: 65%;
+}
+
+.input-container {
+  margin-top: auto;
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.form-element {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap:1rem;
+  padding: 1rem;
+  border-radius: 20px;
+  background-color: #fff;
+  border: 1px solid red;
+  margin: 1rem;
+  margin-top: 2rem;
+  width: 300px;
+}
+
+.form-element .input{
+  width: 100%;
 }
 
 

@@ -142,13 +142,10 @@ const createForm = (parent)=>{
   const adressElement = document.createElement('input')
   const buttonElement = document.createElement('button')
 
-  buttonElement.innerText = 'Rendelés'
-
-  //fetch request for orders
-  buttonElement.addEventListener('click', ()=>{
+  buttonElement.addEventListener('click',()=>{
     fetch('http://localhost:3000/api/order',{
       method:'POST',
-      headers:{
+      headers: {
         'Content-Type': 'application/json',
       },
       body:JSON.stringify({
@@ -157,6 +154,11 @@ const createForm = (parent)=>{
       })
     })
   })
+
+
+  buttonElement.innerText = 'Rendelés'
+  
+
 
   nameElement.placeholder = "Your full name:"
   emailElement.placeholder = "Email Adress:"
@@ -226,16 +228,6 @@ const createText = (parent, element, text, className) => {
   textElement.classList.add(className)
   parent.appendChild(textElement)
 }
-
-// function fetchAllergens() {
-//   fetch("http://localhost:3000/api/allergens")
-// .then(res=>res.json())
-// .then(data=>{
-
-// })
-// }
-
-
 function validateForm() {
   let name
   name = document.forms["orderForm"]["name"].value; // ez szar, undefinedet ad vissza errorral

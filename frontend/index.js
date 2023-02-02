@@ -141,6 +141,19 @@ const createForm = (parent)=>{
   const adressElement = document.createElement('input')
   const buttonElement = document.createElement('button')
 
+  buttonElement.addEventListener('click',()=>{
+    fetch('http://localhost:3000/api/order',{
+      method:'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body:JSON.stringify({
+        pizzaorder,
+        orderedPizzas
+      })
+    })
+  })
+
   buttonElement.innerText = 'ORDER'
   
 
@@ -212,14 +225,6 @@ const createText = (parent, element, text, className) => {
   textElement.classList.add(className)
   parent.appendChild(textElement)
 }
-
-// function fetchAllergens() {
-//   fetch("http://localhost:3000/api/allergens")
-// .then(res=>res.json())
-// .then(data=>{
-
-// })
-// }
 
 
 function validateForm() {

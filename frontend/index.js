@@ -33,7 +33,7 @@ const getExtendedPizzaList = (pizzaList,allergenList) =>{
     return {...pizza, allergens:allergen}
   })
 }
-
+//Create the html elements
 const pizzaComponent = (pizza,ID,array) => {
   const container = document.createElement('div')
   container.classList.add('pizza-container')
@@ -48,7 +48,7 @@ const pizzaComponent = (pizza,ID,array) => {
   createButton(container,ID,array,'order-button')
   pizzaAmountInput(container,ID,'amount-input')
 }
-
+//Get the current date
 const getDate = () =>{
   const date = new Date()
   return ({
@@ -61,14 +61,15 @@ const getDate = () =>{
 }
 
 
-
+//Get the textbox for entering order amount
 const pizzaAmountInput = (parent,ID,className) => {
   const input = document.createElement('input')
-  input.setAttribute('placeholder','enter amount')
+  input.setAttribute('placeholder','Amount')
   input.classList.add(className)
   input.id=`input-${ID}`
   parent.appendChild(input)
 }
+//Creating an order button
 const createButton = (parent,ID,array,className) =>{
   const button = document.createElement('button')
   button.innerText='Order'
@@ -85,7 +86,7 @@ const createButton = (parent,ID,array,className) =>{
     if(form.length<=0)createForm(rootElement)
   })
 }
-
+//Create an input box for filtering by allergens
 const createInput = (arr) =>{
   const input = document.createElement('input')
   input.classList.add('allergen-input')
@@ -154,8 +155,10 @@ const createForm = (parent)=>{
     })
   })
 
-  buttonElement.innerText = 'ORDER'
+
+  buttonElement.innerText = 'Rendelés'
   
+
 
   nameElement.placeholder = "Your full name:"
   emailElement.placeholder = "Email Adress:"
@@ -225,8 +228,6 @@ const createText = (parent, element, text, className) => {
   textElement.classList.add(className)
   parent.appendChild(textElement)
 }
-
-
 function validateForm() {
   let name
   name = document.forms["orderForm"]["name"].value; // ez szar, undefinedet ad vissza errorral
